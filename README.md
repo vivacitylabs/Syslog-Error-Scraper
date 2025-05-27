@@ -5,18 +5,18 @@ for diagnosing on sensors with failing VPs - this script is run on a sensor whic
 
 to run the Syslog-Error-Scraper in its current state. firstly get onto the vivacitydevices server:
 
-'''
+```sh
 ssh vivacitydevices
-'''
+```
 
 we must then transfer the executable file from vivacitydevices, onto the device we want to check. Firstly open an rssh port on the target device in the usual Centricity way. Then the following command can be used 
 
-'''
+```sh
 scp -P 4XXXX ~/robin/syslog2 ubunutu@localhost:~/
-'''
+```
 
 then rssh onto the device the usual way and the Syslog-Scraper exevutable file should be in the home directory. To execute the file simply run the following:
 
-'''
+```sh
 sudo ./syslog2
-'''
+```
