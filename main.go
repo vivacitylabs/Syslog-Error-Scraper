@@ -26,6 +26,7 @@ const (
 	undistortRegex             = `^\w{3} \d{2} \d{2}:\d{2}:\d{2} hardware-\d+ docker-compose.*vision_pipeline.*perspective_transform config error. TransformationType needs to be DISTORTED OR UNDISTORTED`
 	cartesianRegex             = `^\w{3} \d{2} \d{2}:\d{2}:\d{2} hardware-\d+ docker-compose.*vision_pipeline.*near miss calculator requires perspective transform's`
 	gpsRegex                   = `^\w{3} \d{2} \d{2}:\d{2}:\d{2} hardware-\d+ docker-compose.*vision_pipeline.*error when excuting the template with pipelineValues: template: gstreamer_inference_sub_pipeline:26:52: executing "gstreamer_inference_sub_pipeline" at <.Sub.latitude>`
+	kafkaRegex                 = `^.*Timed out \d+ in-flight, \d+ retry-queued, \d+ out-queue, \d+ partially-sent requests$`
 )
 
 var regexes = []string{
@@ -133,6 +134,7 @@ func main() {
 		{Pattern: regexp.MustCompile(undistortRegex), ErrorMessage: "Perspective transform config error."},
 		{Pattern: regexp.MustCompile(cartesianRegex), ErrorMessage: "Near miss calculator error."},
 		{Pattern: regexp.MustCompile(gpsRegex), ErrorMessage: "GPS template execution failed."},
+		{Pattern: regexp.MustCompile(kafkaRegex), ErrorMessage: "Kafka error - try restarting the VP. if the issue persists, raise with tech"},
 	}
 
 	s := NewScraper(logDirPath) // Correct the logDirPath to your actual path
